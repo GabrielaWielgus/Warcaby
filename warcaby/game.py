@@ -1,7 +1,7 @@
 import pygame
-from .constants import RED, WHITE, BLUE, SQUARE_SIZE
+from .constants import YELLOW, WHITE, BLUE, SQUARE_SIZE, START, QUIT, RESTART, TURN_WHITE, TURN_YELLOW, WHITE_WIN, YELLOW_WIN
 from warcaby.board import Board
-
+from warcaby.button import Button
 
 class Game:
     def __init__(self, win):
@@ -11,12 +11,30 @@ class Game:
     def update(self):
         self.board.draw(self.win)
         self.draw_valid_moves(self.valid_moves)
+        self.start_button.draw(self.win)
+        self.quit_button.draw(self.win)
+        self.restart_button.draw(self.win)
+        if self.turn == YELLOW:
+            self.turn_yellow_button.draw(self.win)
+        else:
+            self.turn_white_button.draw(self.win)
+        if self.winner() == YELLOW:
+            self.win_yellow_button.draw(self.win)
+        elif self.winner() == WHITE:
+            self.win_white_button.draw(self.win)
         pygame.display.update()
 
     def _init(self):
         self.selected = None
         self.board = Board()
-        self.turn = RED
+        self.start_button = Button(870, 500, START, 0.8)
+        self.quit_button = Button(870, 600, QUIT, 0.8)
+        self.restart_button = Button(870, 700, RESTART, 0.8)
+        self.turn_white_button = Button(825, 0, TURN_WHITE, 0.8)
+        self.turn_yellow_button = Button(825, 0, TURN_YELLOW, 0.8)
+        self.win_white_button = Button(800, 225, WHITE_WIN, 0.8)
+        self.win_yellow_button = Button(800, 225, YELLOW_WIN, 0.8)
+        self.turn = YELLOW
         self.valid_moves = {}
 
     def reset(self):
@@ -57,11 +75,17 @@ class Game:
                                (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
 
     def winner(self):
+        winner = self.board.winner()
         return self.board.winner()
+
+    def draw_buttons(self, win):
+        self.turn_white_button.draw(self.win)
+        self.turn_yellow_button.draw(self.win)
+
 
     def change_turn(self):
         self.valid_moves = {}
-        if self.turn == RED:
+        if self.turn == YELLOW:
             self.turn = WHITE
         else:
-            self.turn = RED
+            self.turn = YELLOW

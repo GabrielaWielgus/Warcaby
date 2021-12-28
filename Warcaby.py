@@ -1,10 +1,11 @@
 import pygame
 from warcaby.constants import RED, WIDTH, HEIGHT, SQUARE_SIZE
 from warcaby.game import Game
+from warcaby.button import Button
 
 FPS = 60
 
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT + 300))
 pygame.display.set_caption('Warcaby')
 
 
@@ -19,15 +20,16 @@ def main():
     run = True
     clock = pygame.time.Clock()
     game = Game(WIN)
+
     while run:
         clock.tick(FPS)
 
-        if game.winner() != None:
-            print(game.winner())
+        game.draw_buttons(WIN)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
@@ -36,6 +38,5 @@ def main():
         game.update()
 
     pygame.quit()
-
 
 main()
