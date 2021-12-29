@@ -10,7 +10,7 @@ class Game:
         self._init()
         self.win = win
 
-    def update(self):
+    def update(self): #updating display
         self.board.draw(self.win)
         self.draw_valid_moves(self.valid_moves)
         self.restart_button.draw(self.win)
@@ -24,18 +24,20 @@ class Game:
     def _init(self):
         self.selected = None
         self.board = Board()
+        #----graphics----
         self.restart_button = Button(790, 300, RESTART, 0.8)
         self.turn_white_button = Button(825, 0, TURN_WHITE, 0.8)
         self.turn_yellow_button = Button(825, 0, TURN_YELLOW, 0.8)
         self.win_white_button = Button(500, 225, WHITE_WIN, 0.8)
         self.win_yellow_button = Button(500, 225, YELLOW_WIN, 0.8)
+        #----turn-----
         self.turn = YELLOW
         self.valid_moves = {}
 
     def reset(self):
         self._init()
 
-    def select(self, row, col):
+    def select(self, row, col): #select piece to move
         if self.selected:
             result = self._move(row, col)
             if not result:
@@ -53,6 +55,7 @@ class Game:
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
         if self.selected and piece == 0 and (row, col) in self.valid_moves:
+            #moving if piece selected, empty square, possible move
             self.board.move(self.selected, row, col)
             skipped = self.valid_moves[(row, col)]
             if skipped:
@@ -77,7 +80,7 @@ class Game:
         self.turn_yellow_button.draw(self.win)
 
     def change_turn(self):
-        self.valid_moves = {}
+        self.valid_moves = {} #reset dictionary to get another valid moves
         if self.turn == YELLOW:
             self.turn = WHITE
         else:

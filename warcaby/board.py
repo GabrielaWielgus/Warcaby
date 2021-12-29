@@ -23,7 +23,7 @@ class Board:
         if row == ROWS - 1 or row == 0:
             piece.make_king()
             if piece.color == WHITE:
-                self.white_kings += 1
+                self.white_kings += 1 #create king + 1
             else:
                 self.yellow_kings += 1
 
@@ -40,7 +40,7 @@ class Board:
             for col in range(COLS):
                 if col % 2 == ((row + 1) % 2):
                     if row < 3:
-                        self.board[row].append(Piece(row, col, WHITE))
+                        self.board[row].append(Piece(row, col, WHITE)) #adding piece to board list
                     elif row > 4:
                         self.board[row].append(Piece(row, col, YELLOW))
                     else:
@@ -58,10 +58,10 @@ class Board:
 
     def remove(self, pieces):
         for piece in pieces:
-            self.board[piece.row][piece.col] = 0
+            self.board[piece.row][piece.col] = 0 #remove piece
             if piece != 0:
                 if piece.color == YELLOW:
-                    self.yellow_left -= 1
+                    self.yellow_left -= 1 #amount of pieces last - 1
                 else:
                     self.white_left -= 1
 

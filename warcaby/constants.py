@@ -7,7 +7,7 @@ WIDTH, HEIGHT = 800, 800
 ROWS, COLS = 8, 8
 SQUARE_SIZE = WIDTH // COLS
 
-# rgb
+#rgb
 RED = (255, 0, 0)
 YELLOW = (252, 210, 79)
 WHITE = (255, 255, 255)
@@ -15,6 +15,7 @@ BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 GREY = (128, 128, 128)
 
+#graphics
 CROWN = pygame.transform.scale(pygame.image.load('warcaby/assets/crown.png'), (50, 50))
 WHITE_WIN = pygame.transform.scale(pygame.image.load('warcaby/assets/white_win.png'), (400, 400))
 YELLOW_WIN = pygame.transform.scale(pygame.image.load('warcaby/assets/yellow_win.png'), (400, 400))

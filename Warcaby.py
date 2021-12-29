@@ -19,7 +19,7 @@ def get_row_col_from_mouse(pos):
     col = x // SQUARE_SIZE
     return row, col
 
-
+#for restart showing screen
 def show_restart_screen():
     WIN.blit(BACKGROUND_RESET, BACKGROUND_RECT)
     pygame.display.flip()
@@ -30,10 +30,10 @@ def show_restart_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN: #if key pressed
                 waiting = False
 
-
+#for game showing screen
 def show_game_over_screen():
     WIN.blit(BACKGROUND_GAME_OVER, BACKGROUND_RECT_GO)
     pygame.display.flip()
@@ -44,7 +44,7 @@ def show_game_over_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN: #if key pressed
                 waiting = False
 
 
@@ -59,7 +59,7 @@ def main():
         if game.winner() is not None:
             print(game.winner())
             show_game_over_screen()
-            game = Game(WIN)
+            game = Game(WIN) #after showing new window want to restart whole game
             pos = pygame.mouse.get_pos()
             row, col = get_row_col_from_mouse(pos)
             game.select(row, col)
@@ -71,13 +71,13 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 show_restart_screen()
-                game = Game(WIN)
+                game = Game(WIN) #after showing new window want to restart whole game
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
                 game.select(row, col)
                 game.update()
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN: #mouse use to control pieces
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
                 game.select(row, col)
