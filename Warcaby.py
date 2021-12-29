@@ -1,12 +1,19 @@
 import pygame
-from warcaby.constants import RED, WIDTH, HEIGHT, SQUARE_SIZE
+from pygame import K_ESCAPE, K_SPACE
+
+from warcaby.constants import RED, WHITE, WIDTH, HEIGHT, SQUARE_SIZE, BACKGROUND_GAME_OVER, BACKGROUND_RESET, \
+    BACKGROUND_RECT, BACKGROUND_RECT_GO
 from warcaby.game import Game
 from warcaby.button import Button
 
+clock = pygame.time.Clock()
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT + 300))
 pygame.display.set_caption('Warcaby')
+pygame.init()
+font_name = pygame.font.match_font('arial')
+pressed = ''
 
 
 def get_row_col_from_mouse(pos):
@@ -16,19 +23,84 @@ def get_row_col_from_mouse(pos):
     return row, col
 
 
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, RED)
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
+
+def show_restart_screen():
+    WIN.blit(BACKGROUND_RESET, BACKGROUND_RECT)
+    pygame.display.flip()
+    waiting = True
+
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                waiting = False
+
+
+def show_game_over_screen():
+    WIN.blit(BACKGROUND_RESET, BACKGROUND_RECT)
+    pygame.display.flip()
+    waiting = True
+
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                waiting = False
+
+
+def show_game_over_screen():
+    WIN.blit(BACKGROUND_GAME_OVER, BACKGROUND_RECT_GO)
+    pygame.display.flip()
+    waiting = True
+
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                waiting = False
+
+
 def main():
     run = True
-    clock = pygame.time.Clock()
+    game_over = True
     game = Game(WIN)
 
     while run:
         clock.tick(FPS)
 
-        game.draw_buttons(WIN)
+        if game.winner() is not None:
+            print(game.winner())
+            show_game_over_screen()
+            game = Game(WIN)
+            pos = pygame.mouse.get_pos()
+            row, col = get_row_col_from_mouse(pos)
+            game.select(row, col)
+            game.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+            if event.type == pygame.KEYDOWN:
+                show_restart_screen()
+                game = Game(WIN)
+                pos = pygame.mouse.get_pos()
+                row, col = get_row_col_from_mouse(pos)
+                game.select(row, col)
+                game.update()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
@@ -38,5 +110,6 @@ def main():
         game.update()
 
     pygame.quit()
+
 
 main()
