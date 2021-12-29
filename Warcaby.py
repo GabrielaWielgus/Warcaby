@@ -11,9 +11,6 @@ FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT + 300))
 pygame.display.set_caption('Warcaby')
-pygame.init()
-font_name = pygame.font.match_font('arial')
-pressed = ''
 
 
 def get_row_col_from_mouse(pos):
@@ -21,14 +18,6 @@ def get_row_col_from_mouse(pos):
     row = y // SQUARE_SIZE
     col = x // SQUARE_SIZE
     return row, col
-
-
-def draw_text(surf, text, size, x, y):
-    font = pygame.font.Font(font_name, size)
-    text_surface = font.render(text, True, RED)
-    text_rect = text_surface.get_rect()
-    text_rect.midtop = (x, y)
-    surf.blit(text_surface, text_rect)
 
 
 def show_restart_screen():
