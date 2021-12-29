@@ -35,20 +35,6 @@ def show_restart_screen():
 
 
 def show_game_over_screen():
-    WIN.blit(BACKGROUND_RESET, BACKGROUND_RECT)
-    pygame.display.flip()
-    waiting = True
-
-    while waiting:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                waiting = False
-
-
-def show_game_over_screen():
     WIN.blit(BACKGROUND_GAME_OVER, BACKGROUND_RECT_GO)
     pygame.display.flip()
     waiting = True
