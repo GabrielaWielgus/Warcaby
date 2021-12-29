@@ -28,6 +28,10 @@ class Board:
                 self.yellow_kings += 1
 
     def get_piece(self, row, col):
+        try:
+            self.board[row][col]
+        except:
+            print("error don't click on side only on board") #create to get error for try catch
         return self.board[row][col]
 
     def create_board(self):
@@ -49,8 +53,8 @@ class Board:
         for row in range(ROWS):
             for col in range(COLS):
                 piece = self.board[row][col]
-                if piece != 0:
-                    piece.draw(win)
+                piece_dr = lambda x: piece.draw(win) if (x != 0) else None
+                piece_dr(piece)
 
     def remove(self, pieces):
         for piece in pieces:
@@ -66,7 +70,6 @@ class Board:
             return WHITE
         elif self.white_left <= 0:
             return YELLOW
-
         return None
 
     def get_valid_moves(self, piece):
@@ -91,7 +94,6 @@ class Board:
         for r in range(start, stop, step):
             if left < 0:
                 break
-
             current = self.board[r][left]
             if current == 0:
                 if skipped and not last:

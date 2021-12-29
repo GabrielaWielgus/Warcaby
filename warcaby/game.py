@@ -14,14 +14,11 @@ class Game:
         self.board.draw(self.win)
         self.draw_valid_moves(self.valid_moves)
         self.restart_button.draw(self.win)
-        if self.turn == YELLOW:
-            self.turn_yellow_button.draw(self.win)
-        else:
-            self.turn_white_button.draw(self.win)
-        if self.winner() == YELLOW:
-            self.win_yellow_button.draw(self.win)
-        elif self.winner() == WHITE:
-            self.win_white_button.draw(self.win)
+        turn = lambda x: self.turn_yellow_button.draw(self.win) if (x == YELLOW) else self.turn_white_button.draw(self.win)
+        turn(self.turn)
+        if self.winner() == YELLOW or self.winner() == WHITE:
+            winner = lambda x: self.win_yellow_button.draw(self.win) if (x == YELLOW) else self.win_white_button.draw(self.win)
+            winner(self.winner)
         pygame.display.update()
 
     def _init(self):
@@ -30,7 +27,7 @@ class Game:
         self.restart_button = Button(790, 300, RESTART, 0.8)
         self.turn_white_button = Button(825, 0, TURN_WHITE, 0.8)
         self.turn_yellow_button = Button(825, 0, TURN_YELLOW, 0.8)
-        self.win_white_button = Button(800, 225, WHITE_WIN, 0.8)
+        self.win_white_button = Button(500, 225, WHITE_WIN, 0.8)
         self.win_yellow_button = Button(500, 225, YELLOW_WIN, 0.8)
         self.turn = YELLOW
         self.valid_moves = {}
@@ -73,7 +70,6 @@ class Game:
                                (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
 
     def winner(self):
-        game_over = True
         return self.board.winner()
 
     def draw_buttons(self, win):
