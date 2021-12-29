@@ -9,7 +9,7 @@ from warcaby.button import Button
 clock = pygame.time.Clock()
 FPS = 60
 
-WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT + 300))
+WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT))
 pygame.display.set_caption('Warcaby')
 
 
