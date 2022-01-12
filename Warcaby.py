@@ -1,6 +1,5 @@
 import pygame
 from pygame import K_ESCAPE, K_SPACE
-
 from warcaby.constants import RED, WHITE, WIDTH, HEIGHT, SQUARE_SIZE, BACKGROUND_GAME_OVER, BACKGROUND_RESET, \
     BACKGROUND_RECT, BACKGROUND_RECT_GO
 from warcaby.game import Game
@@ -18,6 +17,7 @@ def get_row_col_from_mouse(pos):
     row = y // SQUARE_SIZE
     col = x // SQUARE_SIZE
     return row, col
+
 
 #for restart showing screen
 def show_restart_screen():
@@ -52,7 +52,6 @@ def main():
     run = True
     game_over = True
     game = Game(WIN)
-
     while run:
         clock.tick(FPS)
 
