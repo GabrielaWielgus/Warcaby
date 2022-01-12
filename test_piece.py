@@ -1,7 +1,5 @@
 from warcaby.piece import Piece
-from warcaby.constants import YELLOW, WHITE, BLUE, WIDTH, HEIGHT, SQUARE_SIZE, START, QUIT, RESTART, TURN_WHITE, TURN_YELLOW, \
-    WHITE_WIN, \
-    YELLOW_WIN
+from warcaby.constants import YELLOW, WHITE, BLUE, WIDTH, HEIGHT
 import pygame
 WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT))
 

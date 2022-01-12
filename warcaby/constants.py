@@ -16,8 +16,8 @@ BLUE = (0, 0, 255)
 GREY = (128, 128, 128)
 
 #graphics
-CROWN = pygame.transform.scale(pygame.image.load('warcaby/assets/crown.png'), (50, 50))
 WHITE_WIN = pygame.transform.scale(pygame.image.load('warcaby/assets/white_win.png'), (400, 400))
+CROWN = pygame.transform.scale(pygame.image.load('warcaby/assets/crown.png'), (50, 50))
 YELLOW_WIN = pygame.transform.scale(pygame.image.load('warcaby/assets/yellow_win.png'), (400, 400))
 START = pygame.transform.scale(pygame.image.load('warcaby/assets/start.png'),(200,200))
 QUIT = pygame.transform.scale(pygame.image.load('warcaby/assets/exit.png'), (200, 200))

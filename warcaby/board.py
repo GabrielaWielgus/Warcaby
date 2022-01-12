@@ -1,6 +1,6 @@
 import pygame
-from .constants import BLACK, ROWS, SQUARE_SIZE, COLS, WHITE, YELLOW
-from .piece import Piece
+from warcaby.constants import BLACK, ROWS, SQUARE_SIZE, COLS, WHITE, YELLOW
+from warcaby.piece import Piece
 
 
 class Board:

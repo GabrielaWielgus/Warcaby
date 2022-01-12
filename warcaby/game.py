@@ -1,7 +1,5 @@
 import pygame
-from .constants import WIDTH, HEIGHT, YELLOW, WHITE, BLUE, SQUARE_SIZE, START, QUIT, RESTART, TURN_WHITE, TURN_YELLOW, \
-    WHITE_WIN, \
-    YELLOW_WIN
+from warcaby.constants import YELLOW, WHITE, BLUE, SQUARE_SIZE, RESTART, TURN_WHITE, TURN_YELLOW, WHITE_WIN, YELLOW_WIN
 from warcaby.board import Board
 from warcaby.button import Button
 

@@ -2,9 +2,7 @@ from warcaby.game import Game
 from warcaby.piece import Piece
 from warcaby.board import Board
 import pygame
-from warcaby.constants import RED, WHITE, YELLOW, BLUE, WIDTH, HEIGHT, SQUARE_SIZE, BACKGROUND_GAME_OVER, \
-    BACKGROUND_RESET, \
-    BACKGROUND_RECT, BACKGROUND_RECT_GO
+from warcaby.constants import WHITE, YELLOW, WIDTH, HEIGHT
 
 
 def test_init1():

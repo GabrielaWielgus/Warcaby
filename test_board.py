@@ -1,9 +1,6 @@
-
-from warcaby.game import Game
 from warcaby.piece import Piece
 from warcaby.board import Board
-import pygame
-from warcaby.constants import RED, WHITE, YELLOW, BLUE, WIDTH, HEIGHT, ROWS, COLS
+from warcaby.constants import WHITE, YELLOW
 
 
 def test_move_to_yellow_king():
