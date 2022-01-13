@@ -77,7 +77,7 @@ class Board:
         left = piece.col - 1
         right = piece.col + 1
         row = piece.row
-
+        
         if piece.color == YELLOW or piece.king:
             moves.update(self._traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))  # yellow up move
             moves.update(self._traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))  # yellow up move
