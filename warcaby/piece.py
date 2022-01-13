@@ -3,6 +3,16 @@ import pygame
 
 
 class Piece:
+    """
+    Class Piece is responsible for:
+        Creating Piece, details:
+        - calculating position of piece (in a center of square)
+        - attributes piece to king if condition (if the piece reaches the end of the board) is met
+        - drawing method to draw piece
+        - determine move on the basis of row and columns -> calculate position
+        - piece is representing itself by color rgb details
+
+    """
     PADDING = 15
     OUTLINE = 2
 

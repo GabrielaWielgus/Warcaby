@@ -4,6 +4,19 @@ from warcaby.piece import Piece
 
 
 class Board:
+    """
+    Class Board is responsible for:
+        Creating Board for a game, details:
+        - draw squares on board
+        - move pieces, and makes king if condition is met
+        - getting pieces based on rows and columns of board
+        - creating pieces on board
+        - removing pieces if condition is met
+        - determining the winner
+        - getting valid moves for pieces (or king)
+
+    """
+
     def __init__(self):
         self.board = []
         self.yellow_left = self.white_left = 12
@@ -54,6 +67,7 @@ class Board:
     def white_kings(self, white_k):
         self.__white_kings = white_k
 
+    # first method draw then draw_squares,
     def draw_squares(self, win):
         win.fill(BLACK)
         for row in range(ROWS):

@@ -5,6 +5,22 @@ from warcaby.button import Button
 
 
 class Game:
+    """
+    Class Game is responsible for:
+        Operating the game with using other classes, details:
+        - creating object Board, create
+        - objects buttons which inform user about game
+        - determines player turn
+        - determines winner
+        - stores valid moves in dictionary like for example {(row,col) : [white_piece], (row,col) : []}
+            it means that piece have two moves where one of them has piece on it which we can get as a player
+            and the second move is empty move, we could move there but without any win-get-piece
+        - possibility for selecting pieces
+        - executes drawing, getting (pieces), moving
+        - drawing possible moves
+        - updating whole board with new data depends on condition turn, new moves etc.
+
+    """
     def __init__(self, win):
         self._init()
         self.win = win
@@ -132,7 +148,7 @@ class Game:
         piece = self.__board.get_piece(row, col)
         if piece != 0 and piece.color == self.__turn:
             self.__selected = piece
-            self.__valid_moves = self.__board.get_valid_moves(piece)
+            self.__valid_moves = self.__board.get_valid_moves(piece) # getting valid moves from a board
             return True
 
         return False
@@ -143,6 +159,7 @@ class Game:
             # moving if piece selected, empty square, possible move
             self.__board.move(self.selected, row, col)
             skipped = self.__valid_moves[(row, col)]
+            # skipped means piece to collect by jump
             if skipped:
                 self.__board.remove(skipped)
             self.change_turn()
