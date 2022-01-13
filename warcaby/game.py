@@ -9,6 +9,18 @@ class Game:
         self._init()
         self.win = win
 
+    @property
+    def win(self):
+        return self.__win
+
+    @property
+    def _init(self):
+        return self.__init()
+
+    @win.setter
+    def win(self, win1):
+        self.__win = win1
+
     def update(self):  # updating display
         self.board.draw(self.win)
         self.draw_valid_moves(self.valid_moves)
@@ -35,32 +47,104 @@ class Game:
         self.turn = YELLOW
         self.valid_moves = {}
 
+    @property
+    def selected(self):
+        return self.__selected
+
+    @property
+    def board(self):
+        return self.__board
+
+    @property
+    def restart_button(self):
+        return self.__restart_button
+
+    @property
+    def turn_white_button(self):
+        return self.__turn_white_button
+
+    @property
+    def turn_yellow_button(self):
+        return self.__turn_yellow_button
+
+    @property
+    def win_white_button(self):
+        return self.__win_white_button
+
+    @property
+    def win_yellow_button(self):
+        return self.__win_yellow_button
+
+    @property
+    def turn(self):
+        return self.__turn
+
+    @property
+    def valid_moves(self):
+        return self.__valid_moves
+
+    @selected.setter
+    def selected(self, selected1):
+        self.__selected = selected1
+
+    @board.setter
+    def board(self, board1):
+        self.__board = board1
+
+    @restart_button.setter
+    def restart_button(self, restart):
+        self.__restart_button = restart
+
+    @turn_white_button.setter
+    def turn_white_button(self, turn_white):
+        self.__turn_white_button = turn_white
+
+    @turn_yellow_button.setter
+    def turn_yellow_button(self, turn_yellow):
+        self.__turn_yellow_button = turn_yellow
+
+    @win_white_button.setter
+    def win_white_button(self, win_white):
+        self.__win_white_button = win_white
+
+    @win_yellow_button.setter
+    def win_yellow_button(self, win_yellow):
+        self.__win_yellow_button = win_yellow
+
+    @turn.setter
+    def turn(self, turn1):
+        self.__turn = turn1
+
+    @valid_moves.setter
+    def valid_moves(self, valid_moves1):
+        self.__valid_moves = valid_moves1
+
     def reset(self):
         self._init()
 
     def select(self, row, col):  # select piece to move
-        if self.selected:
+        if self.__selected:
             result = self._move(row, col)
             if not result:
-                self.selected = None
+                self.__selected = None
                 self.select(row, col)
 
-        piece = self.board.get_piece(row, col)
-        if piece != 0 and piece.color == self.turn:
-            self.selected = piece
-            self.valid_moves = self.board.get_valid_moves(piece)
+        piece = self.__board.get_piece(row, col)
+        if piece != 0 and piece.color == self.__turn:
+            self.__selected = piece
+            self.__valid_moves = self.__board.get_valid_moves(piece)
             return True
 
         return False
 
     def _move(self, row, col):
-        piece = self.board.get_piece(row, col)
-        if self.selected and piece == 0 and (row, col) in self.valid_moves:
+        piece = self.__board.get_piece(row, col)
+        if self.__selected and piece == 0 and (row, col) in self.__valid_moves:
             # moving if piece selected, empty square, possible move
-            self.board.move(self.selected, row, col)
-            skipped = self.valid_moves[(row, col)]
+            self.__board.move(self.selected, row, col)
+            skipped = self.__valid_moves[(row, col)]
             if skipped:
-                self.board.remove(skipped)
+                self.__board.remove(skipped)
             self.change_turn()
         else:
             return False
@@ -74,15 +158,15 @@ class Game:
                                (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
 
     def winner(self):
-        return self.board.winner()
+        return self.__board.winner()
 
     def draw_buttons(self, win):
-        self.turn_white_button.draw(self.win)
-        self.turn_yellow_button.draw(self.win)
+        self.__turn_white_button.draw(self.win)
+        self.__turn_yellow_button.draw(self.win)
 
     def change_turn(self):
-        self.valid_moves = {}  # reset dictionary to get another valid moves
-        if self.turn == YELLOW:
-            self.turn = WHITE
+        self.__valid_moves = {}  # reset dictionary to get another valid moves
+        if self.__turn == YELLOW:
+            self.__turn = WHITE
         else:
-            self.turn = YELLOW
+            self.__turn = YELLOW

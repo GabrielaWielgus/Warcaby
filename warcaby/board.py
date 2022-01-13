@@ -10,6 +10,50 @@ class Board:
         self.yellow_kings = self.white_kings = 0
         self.create_board()
 
+    @property
+    def board(self):
+        return self.__board
+
+    @property
+    def yellow_left(self):
+        return self.__yellow_left
+
+    @property
+    def yellow_kings(self):
+        return self.__yellow_kings
+
+    @property
+    def create_board(self):
+        return self.__create_board()
+
+    @property
+    def white_left(self):
+        return self.__white_left
+
+    @property
+    def white_kings(self):
+        return self.__white_kings
+
+    @board.setter
+    def board(self, board1):
+        self.__board = board1
+
+    @yellow_left.setter
+    def yellow_left(self, yellow_l):
+        self.__yellow_left = yellow_l
+
+    @yellow_kings.setter
+    def yellow_kings(self, yellow_k):
+        self.__yellow_kings = yellow_k
+
+    @white_left.setter
+    def white_left(self, white_l):
+        self.__white_left = white_l
+
+    @white_kings.setter
+    def white_kings(self, white_k):
+        self.__white_kings = white_k
+
     def draw_squares(self, win):
         win.fill(BLACK)
         for row in range(ROWS):
@@ -23,7 +67,7 @@ class Board:
         if row == ROWS - 1 or row == 0:
             piece.make_king()
             if piece.color == WHITE:
-                self.white_kings += 1 #create king + 1
+                self.white_kings += 1  # create king + 1
             else:
                 self.yellow_kings += 1
 
@@ -31,7 +75,7 @@ class Board:
         try:
             self.board[row][col]
         except:
-            print("error don't click on side only on board") #create to get error for try catch
+            print("error don't click on side only on board")  # create to get error for try catch
         return self.board[row][col]
 
     def create_board(self):
@@ -40,7 +84,7 @@ class Board:
             for col in range(COLS):
                 if col % 2 == ((row + 1) % 2):
                     if row < 3:
-                        self.board[row].append(Piece(row, col, WHITE)) #adding piece to board list
+                        self.board[row].append(Piece(row, col, WHITE))  # adding piece to board list
                     elif row > 4:
                         self.board[row].append(Piece(row, col, YELLOW))
                     else:
@@ -58,10 +102,10 @@ class Board:
 
     def remove(self, pieces):
         for piece in pieces:
-            self.board[piece.row][piece.col] = 0 #remove piece
+            self.board[piece.row][piece.col] = 0  # remove piece
             if piece != 0:
                 if piece.color == YELLOW:
-                    self.yellow_left -= 1 #amount of pieces last - 1
+                    self.yellow_left -= 1  # amount of pieces last - 1
                 else:
                     self.white_left -= 1
 
@@ -77,7 +121,7 @@ class Board:
         left = piece.col - 1
         right = piece.col + 1
         row = piece.row
-        
+
         if piece.color == YELLOW or piece.king:
             moves.update(self._traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))  # yellow up move
             moves.update(self._traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))  # yellow up move

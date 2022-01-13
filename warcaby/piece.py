@@ -39,6 +39,10 @@ class Piece:
     def y(self):
         return self.__y
 
+    @property
+    def calc_pos(self):
+        return self.__calc_pos
+
     @row.setter
     def row(self, row1):
         self.__row = row1
