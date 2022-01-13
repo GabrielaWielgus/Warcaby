@@ -1,9 +1,8 @@
 import pygame
-from pygame import K_ESCAPE, K_SPACE
-from warcaby.constants import RED, WHITE, WIDTH, HEIGHT, SQUARE_SIZE, BACKGROUND_GAME_OVER, BACKGROUND_RESET, \
+from warcaby.constants import WIDTH, HEIGHT, SQUARE_SIZE, BACKGROUND_GAME_OVER, BACKGROUND_RESET, \
     BACKGROUND_RECT, BACKGROUND_RECT_GO
 from warcaby.game import Game
-from warcaby.button import Button
+from warcaby.ErrorsHandle import *
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -79,6 +78,13 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN: #mouse use to control pieces
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
+                if col > 7 or row > 7:
+                    print("You have clicked side of board, DON'T do it anymore\n" + "Row clicked: \n" + str(
+                            row) + "\nColumn clicked: \n" + str(col))
+                    break
+                elif row <= 7 and col <= 7:
+                    game.select(row, col)
+                    game.update()
                 game.select(row, col)
 
         game.update()
