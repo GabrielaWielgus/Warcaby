@@ -9,7 +9,7 @@ FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH + 300, HEIGHT))
 pygame.display.set_caption('Warcaby')
-
+print("Warcaby.py is running...")
 
 def get_row_col_from_mouse(pos):
     x, y = pos
