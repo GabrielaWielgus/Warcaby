@@ -147,37 +147,44 @@ class Board:
         return moves
 
     def _traverse_left(self, start, stop, step, color, left, skipped=[]):
+        # start -> row above where piece is
+        # step -> up or down diagonally
+        # stop -> piece end of sight
         moves = {}
         last = []
         for r in range(start, stop, step):
             if left < 0:
                 break
             current = self.board[r][left]
-            if current == 0:
+            if current == 0:  # no piece in square
                 if skipped and not last:
-                    break
+                    break  # in loop if we skipped, found empty square, and if that's all -> no more moves
                 elif skipped:
+                    # increases the field of sight +1, across piece
                     moves[(r, left)] = last + skipped  # double jumping
                 else:
+                    # move add
                     moves[(r, left)] = last
 
                 if last:
                     if step == -1:
-                        row = max(r - 3, 0)
+                        row = max(r - 3, -1)  # !!! CHANGE AFTER PRESENTATION 0 to -1 before max(r - 3, 0)
                     else:
                         row = min(r + 3, ROWS)
+                    # now we are in new position, need to recalculate moves
                     moves.update(self._traverse_left(r + step, row, step, color, left - 1, skipped=last))
                     moves.update(self._traverse_right(r + step, row, step, color, left + 1, skipped=last))
                 break
-            elif current.color == color:
+            elif current.color == color:  # piece with our color, blocked
                 break
-            else:
+            else:  # opponent color, piece in move
                 last = [current]
             left -= 1
 
         return moves
 
     def _traverse_right(self, start, stop, step, color, right, skipped=[]):
+        #same like in _traverse_left but on right side
         moves = {}
         last = []
         for r in range(start, stop, step):
@@ -195,7 +202,7 @@ class Board:
 
                 if last:
                     if step == -1:
-                        row = max(r - 3, 0)
+                        row = max(r - 3, -1)
                     else:
                         row = min(r + 3, ROWS)
                     moves.update(self._traverse_left(r + step, row, step, color, right - 1, skipped=last))
